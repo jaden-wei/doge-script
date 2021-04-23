@@ -2,7 +2,7 @@ import tweepy
 import robin_stocks.robinhood as r
 import time
 
-from secrets import *
+from secret import *
 
 # set up and authenticate tweepy
 def tweepy_setup():
