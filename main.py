@@ -33,8 +33,11 @@ def robinhood_logout():
 
 #get and return doge price
 def get_doge_price():
-    doge_price = float(r.crypto.get_crypto_quote('DOGE').get('ask_price'))
-    return doge_price
+    try:
+        doge_price = float(r.crypto.get_crypto_quote('DOGE').get('ask_price'))
+        return doge_price
+    except Exception as e:
+        print(e)
 
 #return true if doge or similar words are found, return false if not
 def scan_image_for_text(img_url):
@@ -65,6 +68,7 @@ def search_text_for_doge(tweets):
         tweet = tweet.text.lower()
         if ('doge' in tweet or 'dog3' in tweet or 'dog' in tweet or 'd0ge' in tweet or 'd0g3' in tweet):
             print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
+            print('THE GOD HAS SPOKEN')
             return True
     return False
 
@@ -75,6 +79,7 @@ def search_media_for_doge(tweets):
             for picture in media:
                 if scan_image_for_text(picture['media_url']):
                     print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
+                    print('THE GOD HAS SPOKEN')
                     return True
     return False
 
