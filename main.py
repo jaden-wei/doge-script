@@ -69,6 +69,7 @@ def search_text_for_doge(tweets):
         if ('doge' in tweet or 'dog3' in tweet or 'dog' in tweet or 'd0ge' in tweet or 'd0g3' in tweet):
             print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
             print('THE GOD HAS SPOKEN')
+            print(tweet.text)
             return True
     return False
 
@@ -80,6 +81,7 @@ def search_media_for_doge(tweets):
                 if scan_image_for_text(picture['media_url']):
                     print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
                     print('THE GOD HAS SPOKEN')
+                    print(tweet.text)
                     return True
     return False
 
