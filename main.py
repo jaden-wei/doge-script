@@ -60,29 +60,29 @@ def scan_image_for_text(img_url):
 
     return False
 
-# tweets - list of recent tweets by elon musk
+# tweet - elon's recent tweet
 # search for doge or any similar words in the tweets
 # returns true if order was placed
-def search_text_for_doge(tweets):
-    for tweet in tweets:
-        tweet = tweet.text.lower()
-        if ('doge' in tweet or 'dog3' in tweet or 'dog' in tweet or 'd0ge' in tweet or 'd0g3' in tweet):
-            print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
-            print('THE GOD HAS SPOKEN')
-            print(tweet.text)
-            return True
+def search_text_for_doge(tweet):
+    tweet = tweet.text.lower()
+    if ('doge' in tweet or 'dog3' in tweet or 'dog' in tweet or 'd0ge' in tweet or 'd0g3' in tweet):
+        print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
+        print('he said the word')
+        print(tweet.text)
+        print(tweet.id)
+        return True
     return False
 
-def search_media_for_doge(tweets):
-    for tweet in tweets:
-        media = tweet.entities.get('media', [])
-        if (len(media) > 0):
-            for picture in media:
-                if scan_image_for_text(picture['media_url']):
-                    print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
-                    print('THE GOD HAS SPOKEN')
-                    print(tweet.text)
-                    return True
+def search_media_for_doge(tweet):
+    media = tweet.entities.get('media', [])
+    if (len(media) > 0):
+        for picture in media:
+            if scan_image_for_text(picture['media_url']):
+                print(r.orders.order_buy_crypto_by_quantity('DOGE', 500))
+                print('he said the word')
+                print(tweet.text)
+                print(tweet.id)
+                return True
     return False
 
 def main():
@@ -94,15 +94,15 @@ def main():
     purchase_doge = False
 
     while not purchase_doge:
-        # get elon's recent tweets
-        elon_tweets = api.user_timeline('elonmusk')
+        # get elon's recent tweet
+        recent = api.user_timeline('elonmusk')[0]
 
         print(get_doge_price())
 
-        purchase_doge = search_text_for_doge(elon_tweets)
+        purchase_doge = search_text_for_doge(recent)
         
         if not purchase_doge:
-            purchase_doge = search_media_for_doge(elon_tweets)
+            purchase_doge = search_media_for_doge(recent)
         
         time.sleep(90)
 
