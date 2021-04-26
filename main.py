@@ -95,7 +95,10 @@ def main():
 
     while not purchase_doge:
         # get elon's recent tweet
-        recent = api.user_timeline('elonmusk')[0]
+        try:
+            recent = api.user_timeline('elonmusk')[0]
+        except IndexError:
+            recent = ''
 
         print(get_doge_price())
 
